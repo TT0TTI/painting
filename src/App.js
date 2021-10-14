@@ -1,4 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
+import Canvas from "./containers/canvasContainer";
+import Color from "./containers/controlColor";
+import ModeBtn from "./containers/controlButton";
+import Range from "./containers/controlRange";
 import "./App.css";
 
 const App = () => {
@@ -98,87 +102,42 @@ const App = () => {
 
   return (
     <>
-      <canvas
-        ref={canvasRef}
-        className="canvas"
-        width={CANVAS_SIZE}
-        height={CANVAS_SIZE}
-        onMouseMove={handleMouseMove}
-        onMouseDown={startPainting}
-        onMouseUp={stopPainting}
-        onMouseLeave={stopPainting}
-        onClick={handleCanvasClick}
-        onContextMenu={handleCM}
-      ></canvas>
+      <Canvas
+        canvasRef={canvasRef}
+        CANVAS_SIZE={CANVAS_SIZE}
+        handleMouseMove={handleMouseMove}
+        startPainting={startPainting}
+        stopPainting={stopPainting}
+        handleCanvasClick={handleCanvasClick}
+        handleCM={handleCM}
+      />
 
       <div className="controls">
         <div className="controls__range">
-          <input
-            type="range"
-            className="jsRange"
+          <Range
             min="1"
             max="10"
             value={value}
-            onChange={handleChange}
+            handleChange={handleChange}
             step="1"
           />
         </div>
 
         <div className="controls__btns">
-          <button className="jsMode" onClick={handleModeClick}>
-            Fill
-          </button>
-          <button className="jsSave" onClick={handelSave}>
-            Save
-          </button>
+          <ModeBtn clickEvent={handleModeClick} text={"Fill"} />
+          <ModeBtn clickEvent={handelSave} text={"Save"} />
         </div>
 
         <div className="controls__colors">
-          <div
-            className="controls__color"
-            onClick={handleChangeColor}
-            style={{ backgroundColor: "black" }}
-          ></div>
-          <div
-            className="controls__color"
-            onClick={handleChangeColor}
-            style={{ backgroundColor: "white" }}
-          ></div>
-          <div
-            className="controls__color"
-            onClick={handleChangeColor}
-            style={{ backgroundColor: "#FF3B30" }}
-          ></div>
-          <div
-            className="controls__color"
-            onClick={handleChangeColor}
-            style={{ backgroundColor: "#FF9500" }}
-          ></div>
-          <div
-            className="controls__color"
-            onClick={handleChangeColor}
-            style={{ backgroundColor: "#FFCC00" }}
-          ></div>
-          <div
-            className="controls__color"
-            onClick={handleChangeColor}
-            style={{ backgroundColor: "#4CD963" }}
-          ></div>
-          <div
-            className="controls__color"
-            onClick={handleChangeColor}
-            style={{ backgroundColor: "#5AC8FA" }}
-          ></div>
-          <div
-            className="controls__color"
-            onClick={handleChangeColor}
-            style={{ backgroundColor: "#0579FF" }}
-          ></div>
-          <div
-            className="controls__color"
-            onClick={handleChangeColor}
-            style={{ backgroundColor: "#5856D6" }}
-          ></div>
+          <Color handleChangeColor={handleChangeColor} color={"black"} />
+          <Color handleChangeColor={handleChangeColor} color={"white"} />
+          <Color handleChangeColor={handleChangeColor} color={"#FF3B30"} />
+          <Color handleChangeColor={handleChangeColor} color={"#FF9500"} />
+          <Color handleChangeColor={handleChangeColor} color={"#FFCC00"} />
+          <Color handleChangeColor={handleChangeColor} color={"#4CD963"} />
+          <Color handleChangeColor={handleChangeColor} color={"#5AC8FA"} />
+          <Color handleChangeColor={handleChangeColor} color={"#0579FF"} />
+          <Color handleChangeColor={handleChangeColor} color={"#5856D6"} />
         </div>
       </div>
     </>
